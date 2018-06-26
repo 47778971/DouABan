@@ -1,9 +1,11 @@
 package com.jun.douaban.view
 
 import android.app.Activity
+import android.app.ProgressDialog
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
-import android.widget.ProgressBar
+import android.widget.AdapterView
 import com.jun.douaban.R
 import com.jun.douaban.adapter.FilmListAdapter
 import com.jun.douaban.contract.Top250Contract
@@ -14,14 +16,14 @@ import kotlinx.android.synthetic.main.activity_main.*
 
 class Top250Activity : Activity(), Top250Contract.IView {
 
-    var progressBar: ProgressBar? = null
+    var dialog: ProgressDialog? = null
 
     override fun showDialog() {
-        progressBar?.visibility = View.VISIBLE
+        dialog = ProgressDialog.show(this, "获取影片信息", "加载中...")
     }
 
     override fun dismissDialog() {
-        progressBar?.visibility = View.GONE
+        dialog?.dismiss()
     }
 
     override fun showData(films: Film) {
@@ -31,8 +33,13 @@ class Top250Activity : Activity(), Top250Contract.IView {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        progressBar = ProgressBar(this)
-        var top250Presenter : Top250Presenter = Top250Presenter(this)
-        top250Presenter.present()
+        Top250Presenter(this).getTop250()
+
+
+        listView.onItemClickListener = AdapterView.OnItemClickListener { parent, view, position, id ->
+            var intent: Intent = Intent(this@Top250Activity, FilmDetailActivity::class.java)
+            intent.putExtra(FilmDetailActivity.TITLE_EXTRA, "")
+            startActivity(intent)
+        }
     }
 }

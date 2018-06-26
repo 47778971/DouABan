@@ -13,12 +13,12 @@ class Top250Presenter : Top250Contract.IPresenter {
         this.view = view;
     }
 
-    override fun present() {
+    override fun getTop250() {
         view!!.showDialog()
-        Top250Model().getTop250(object : OnHttpCallBack {
-            override fun onSuccess(it: Film) {
+        Top250Model().getTop250(object : OnHttpCallBack<Film> {
+            override fun onSuccess(film: Film) {
                 view!!.dismissDialog()
-                view!!.showData(it)
+                view!!.showData(film)
             }
 
             override fun onFailure() {

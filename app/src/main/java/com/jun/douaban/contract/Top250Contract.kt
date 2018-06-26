@@ -5,16 +5,16 @@ import com.jun.douaban.http.OnHttpCallBack
 
 interface Top250Contract {
     interface IModel {
-        fun getTop250(httpCallBack: OnHttpCallBack)
+        fun getTop250(httpCallBack: OnHttpCallBack<Film>)
     }
 
     interface IView {
         fun showDialog()
         fun dismissDialog()
-        fun showData(films: Film)
+        fun showData(film: Film)
     }
 
     interface IPresenter {
-        fun present()
+        fun getTop250()
     }
 }
