@@ -7,14 +7,14 @@ import com.jun.douaban.http.OnHttpCallBack
 import com.jun.douaban.util.ApiServiceHelper
 import com.jun.douaban.util.RetrofitHelper
 import com.jun.douaban.util.RxHelper
+import io.reactivex.ObservableSource
 import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.functions.Function
 import io.reactivex.schedulers.Schedulers
 import retrofit2.HttpException
-import io.reactivex.ObservableSource
-import io.reactivex.functions.Function
 
 
-class FilmDetailModel : BaseContract.IModel<Film.SubjectsBean.CastsBean> {
+class FilmDetailModel : BaseContract.IModel {
     fun getFilmDetail(id: String, httpCallBack: OnHttpCallBack<Film.SubjectsBean>) {
         RxHelper<Film.SubjectsBean>().subscribe(ApiServiceHelper.getApiService().getSubject(id), httpCallBack)
     }

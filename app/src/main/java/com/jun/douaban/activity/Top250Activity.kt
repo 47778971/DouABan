@@ -1,4 +1,4 @@
-package com.jun.douaban.view
+package com.jun.douaban.activity
 
 import android.content.Intent
 import android.os.Bundle
@@ -12,7 +12,8 @@ import com.jun.douaban.presenter.Top250Presenter
 import kotlinx.android.synthetic.main.activity_main.*
 
 
-class Top250Activity : BaseActivity(), BaseContract.IView<Film> {
+class Top250Activity : BaseActivity(), BaseContract.IView {
+
 
     var subjects: List<Film.SubjectsBean>? = null
 
@@ -28,8 +29,8 @@ class Top250Activity : BaseActivity(), BaseContract.IView<Film> {
         }
     }
 
-    override fun showData(films: Film) {
-        subjects = films.subjects
+    override fun <T> showData(t: T) {
+        subjects = (t as Film).subjects
         listView.adapter = FilmListAdapter(this, subjects!!)
     }
 

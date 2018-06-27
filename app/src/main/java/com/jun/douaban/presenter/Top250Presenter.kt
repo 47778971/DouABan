@@ -5,7 +5,7 @@ import com.jun.douaban.entity.Film
 import com.jun.douaban.http.OnHttpCallBack
 import com.jun.douaban.model.Top250Model
 
-class Top250Presenter(view: BaseContract.IView<Film>) : BasePresenter<Film>(view) {
+class Top250Presenter(view: BaseContract.IView) : BasePresenter(view) {
     fun getData() {
         view!!.showDialog()
         Top250Model().getData(object : OnHttpCallBack<Film> {
