@@ -6,7 +6,7 @@ interface BaseContract {
     }
 
     interface IView<T> {
-        fun showDialog(content: String)
+        fun showDialog()
         fun dismissDialog()
         fun showToast(toast: String)
         fun showData(t: T)

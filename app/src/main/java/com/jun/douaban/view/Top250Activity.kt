@@ -32,4 +32,9 @@ class Top250Activity : BaseActivity(), BaseContract.IView<Film> {
         subjects = films.subjects
         listView.adapter = FilmListAdapter(this, subjects!!)
     }
+
+    override fun showDialog() {
+        showDialog(resources.getString(R.string.get_top_250))
+    }
+
 }

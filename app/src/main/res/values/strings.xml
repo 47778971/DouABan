@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">DouABan</string>
+    <string name="get_film_detail">获取影片详情</string>
+    <string name="get_top_250">获取TOP250</string>
 </resources>

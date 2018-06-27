@@ -7,7 +7,7 @@ import com.jun.douaban.model.Top250Model
 
 class Top250Presenter(view: BaseContract.IView<Film>) : BasePresenter<Film>(view) {
     fun getData() {
-        view!!.showDialog("获取TOP250")
+        view!!.showDialog()
         Top250Model().getData(object : OnHttpCallBack<Film> {
             override fun onSuccess(film: Film) {
                 view!!.dismissDialog()

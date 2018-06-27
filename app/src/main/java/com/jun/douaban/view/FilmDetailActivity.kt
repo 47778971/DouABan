@@ -8,7 +8,7 @@ import com.jun.douaban.entity.Film
 import com.jun.douaban.presenter.FilmDetailPresenter
 import kotlinx.android.synthetic.main.activity_film_detail.*
 
-class FilmDetailActivity : BaseActivity(), BaseContract.IView<Film.SubjectsBean> {
+class FilmDetailActivity : BaseActivity(), BaseContract.IView<Film.SubjectsBean.CastsBean> {
 
     companion object {
         val ID_EXTRA: String = "id"
@@ -19,10 +19,14 @@ class FilmDetailActivity : BaseActivity(), BaseContract.IView<Film.SubjectsBean>
         setContentView(R.layout.activity_film_detail)
 
         var id = intent.getStringExtra(ID_EXTRA)
-        FilmDetailPresenter(this).getFilmDetail(id)
+        FilmDetailPresenter(this).getCastsDetail(id)
     }
 
-    override fun showData(film: Film.SubjectsBean) {
-        titleTextView.text = film.title
+    override fun showData(film: Film.SubjectsBean.CastsBean) {
+        titleTextView.text = film.name
+    }
+
+    override fun showDialog() {
+        showDialog(resources.getString(R.string.get_film_detail))
     }
 }
