@@ -1,23 +1,14 @@
 package com.jun.douaban.model
 
-import com.jun.douaban.api.ApiService
-import com.jun.douaban.contract.Top250Contract
+import com.jun.douaban.api.ApiConstants
+import com.jun.douaban.contract.BaseContract
 import com.jun.douaban.entity.Film
 import com.jun.douaban.http.OnHttpCallBack
-import com.jun.douaban.http.RetrofitHelper
-import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.functions.Consumer
-import io.reactivex.schedulers.Schedulers
+import com.jun.douaban.util.ApiServiceHelper
+import com.jun.douaban.util.RxHelper
 
-class Top250Model : Top250Contract.IModel {
-    override fun getTop250(httpCallBack: OnHttpCallBack<Film>) {
-        RetrofitHelper.newInstance("https://api.douban.com/")
-                .create(ApiService::class.java).getTop250()
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread()).subscribe(Consumer {
-                    httpCallBack.onSuccess(it)
-                }, Consumer {
-                    httpCallBack.onFailure()
-                })
+class Top250Model : BaseContract.IModel<Film> {
+    fun getData(httpCallBack: OnHttpCallBack<Film>) {
+        RxHelper<Film>().subscribe(ApiServiceHelper.getApiService().getTop250(), httpCallBack)
     }
 }

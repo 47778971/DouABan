@@ -3,13 +3,13 @@ package com.jun.douaban.presenter
 import com.jun.douaban.contract.BaseContract
 import com.jun.douaban.entity.Film
 import com.jun.douaban.http.OnHttpCallBack
-import com.jun.douaban.model.Top250Model
+import com.jun.douaban.model.FilmDetailModel
 
-class Top250Presenter(view: BaseContract.IView<Film>) : BasePresenter<Film>(view) {
-    fun getData() {
-        view!!.showDialog("获取TOP250")
-        Top250Model().getData(object : OnHttpCallBack<Film> {
-            override fun onSuccess(film: Film) {
+class FilmDetailPresenter(view: BaseContract.IView<Film.SubjectsBean>) : BasePresenter<Film.SubjectsBean>(view) {
+    fun getFilmDetail(id: String) {
+        view!!.showDialog("获取影片详情")
+        FilmDetailModel().getFilmDetail(id, object : OnHttpCallBack<Film.SubjectsBean> {
+            override fun onSuccess(film: Film.SubjectsBean) {
                 view!!.dismissDialog()
                 view!!.showData(film)
             }
@@ -22,4 +22,6 @@ class Top250Presenter(view: BaseContract.IView<Film>) : BasePresenter<Film>(view
             }
         })
     }
+
+
 }
